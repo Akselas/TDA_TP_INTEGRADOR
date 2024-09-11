@@ -16,8 +16,8 @@ def test_comun():
     juego_monedas(arr, turno, sofia, mateo)
     
     "Assert"
-    assert sofia.monedero == 22, "No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
-    assert mateo.monedero == 6, "No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.monedero} pesos"
+    assert sofia.monedero == 22, f"No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
+    assert mateo.monedero == 6, f"No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.monedero} pesos"
     print("Test comun paso")
 
 def test_numeros_grandes():
@@ -30,8 +30,8 @@ def test_numeros_grandes():
     juego_monedas(arr, turno, sofia, mateo)
     
     "Assert"
-    assert sofia.monedero == 3391470, "No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
-    assert mateo.monedero == 1555880, "No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.monedero} pesos"
+    assert sofia.monedero == 3391470, f"No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
+    assert mateo.monedero == 1555880, f"No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.monedero} pesos"
     print("Tests con numeros grandes paso")
 
 
