@@ -1,4 +1,5 @@
 from TP1_juego_monedas import juego_monedas
+from juego_monedas_iterativo import juego_monedas_iterativo
 from jugador import Jugador
 
 def pruebas():
@@ -14,6 +15,7 @@ def test_comun():
     
     "Act"
     juego_monedas(arr, turno, sofia, mateo)
+    #juego_monedas_iterativo(arr, sofia, mateo)
     
     "Assert"
     assert sofia.monedero == 22, f"No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
@@ -26,8 +28,10 @@ def test_numeros_grandes():
     sofia = Jugador("Sofia")
     mateo = Jugador("Mateo")
     turno = True
+
     "Act"
     juego_monedas(arr, turno, sofia, mateo)
+    #juego_monedas_iterativo(arr, sofia, mateo)
     
     "Assert"
     assert sofia.monedero == 3391470, f"No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
