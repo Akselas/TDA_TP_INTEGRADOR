@@ -1,7 +1,6 @@
+from juego_monedas import jugar
 
-from juego_monedas import main
-
-def pruebas():
+def tests():
     test6()
     test20()
     test25()
@@ -24,7 +23,7 @@ def leer_resultados(archivo_resultados):
 def test6():
     path = 'archivos_prueba/6.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_6.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -37,7 +36,7 @@ def test6():
 def test20():
     path = 'archivos_prueba/20.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_20.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -49,7 +48,7 @@ def test20():
 def test25():
     path = 'archivos_prueba/25.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_25.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -61,7 +60,7 @@ def test25():
 def test50():
     path = 'archivos_prueba/50.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_50.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -73,7 +72,7 @@ def test50():
 def test100():
     path = 'archivos_prueba/100.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_100.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -85,7 +84,7 @@ def test100():
 def test1000():
     path = 'archivos_prueba/1000.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_1000.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -97,7 +96,7 @@ def test1000():
 def test10000():
     path = 'archivos_prueba/10000.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_10000.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -109,7 +108,7 @@ def test10000():
 def test20000():
     path = 'archivos_prueba/20000.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_20000.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -121,7 +120,7 @@ def test20000():
 def test_valores_grandes():
     path = 'archivos_prueba/valores_grandes.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_valores_grandes.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -134,7 +133,7 @@ def test_valores_grandes():
 def test_empate():
     path = 'archivos_prueba/empate.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_empate.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -147,7 +146,7 @@ def test_empate():
 def test_casi_empate():
     path = 'archivos_prueba/casi_empate.txt'
 
-    main(path)
+    jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_casi_empate.txt'
     sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
@@ -156,4 +155,4 @@ def test_casi_empate():
     print("Test casi empate monedas: pasó")
 
 if __name__ == "__main__":
-    pruebas()
+    tests()
