@@ -17,8 +17,8 @@ def test1():
     juego_monedas(arr, sofia, mateo)
     
     "Assert"
-    assert sofia.monedero == 22, f"Test 1: No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
-    assert mateo.monedero == 6, f"Test 1: No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.monedero} pesos"
+    assert sofia.ganancia == 22, f"Test 1: No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.ganancia} pesos"
+    assert mateo.ganancia == 6, f"Test 1: No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.ganancia} pesos"
     print("Test 1: pasó")
 
 def test2_numeros_grandes():
@@ -32,8 +32,8 @@ def test2_numeros_grandes():
     juego_monedas(arr, sofia, mateo)
     
     "Assert"
-    assert sofia.monedero == 3391470, f"Test 2 - Números grandes: No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
-    assert mateo.monedero == 1555880, f"Test 2 - Números grandes: No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.monedero} pesos"
+    assert sofia.ganancia == 3391470, f"Test 2 - Números grandes: No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.ganancia} pesos"
+    assert mateo.ganancia == 1555880, f"Test 2 - Números grandes: No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.ganancia} pesos"
     print("Test 2 - Números grandes: pasó")
 
 
