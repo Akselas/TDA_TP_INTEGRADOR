@@ -1,6 +1,7 @@
-from TP1_juego_monedas import juego_monedas
-from juego_monedas_iterativo import juego_monedas_iterativo
+from juego_monedas_rec import juego_monedas_rec
+from juego_monedas import juego_monedas
 from jugador import Jugador
+from collections import deque
 
 def pruebas():
     test_comun()
@@ -8,14 +9,14 @@ def pruebas():
 
 def test_comun():
     "Arrange"
-    arr = [3,9,1,8,2,5]
+    arr = deque([3,9,1,8,2,5])
     sofia = Jugador("Sofia")
     mateo = Jugador("Mateo")
     turno = True
     
     "Act"
-    juego_monedas(arr, turno, sofia, mateo)
-    #juego_monedas_iterativo(arr, sofia, mateo)
+    #juego_monedas_rec(arr, turno, sofia, mateo)
+    juego_monedas(arr, sofia, mateo)
     
     "Assert"
     assert sofia.monedero == 22, f"No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
@@ -24,14 +25,14 @@ def test_comun():
 
 def test_numeros_grandes():
     "Arrange"
-    arr = [413759, 698681, 730491, 596380, 3014, 416704, 874886, 35898, 686505, 491032]
+    arr = deque([413759, 698681, 730491, 596380, 3014, 416704, 874886, 35898, 686505, 491032])
     sofia = Jugador("Sofia")
     mateo = Jugador("Mateo")
     turno = True
 
     "Act"
-    juego_monedas(arr, turno, sofia, mateo)
-    #juego_monedas_iterativo(arr, sofia, mateo)
+    #juego_monedas_rec(arr, turno, sofia, mateo)
+    juego_monedas(arr, sofia, mateo)
     
     "Assert"
     assert sofia.monedero == 3391470, f"No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.monedero} pesos"
