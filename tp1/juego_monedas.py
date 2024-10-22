@@ -22,9 +22,12 @@ def main(path):
         lista_monedas = list(map(int, linea_valores_monedas.split(';')))
     
     monedas = deque(lista_monedas)
-    sofia = Jugador("Sofia")
+    sophia = Jugador("Sophia")
     mateo = Jugador("Mateo")
-    juego_monedas(monedas, sofia, mateo)
+    juego_monedas(monedas, sophia, mateo)
+
+    carpeta_resultados = 'archivos_resultados'
+    os.makedirs(carpeta_resultados, exist_ok=True)
 
     nombre_archivo_prueba = os.path.basename(path)
     nombre_sin_extension = os.path.splitext(nombre_archivo_prueba)[0]
@@ -32,7 +35,7 @@ def main(path):
     nombre_archivo_resultados = f'resultados_{nombre_sin_extension}.txt'
 
     with open(os.path.join('archivos_resultados', nombre_archivo_resultados), 'w') as archivo_resultados:
-        archivo_resultados.write(f"Ganancia de Sofia: {sofia.ganancia}\n")
+        archivo_resultados.write(f"Ganancia de Sophia: {sophia.ganancia}\n")
         archivo_resultados.write(f"Ganancia de Mateo: {mateo.ganancia}\n")
 
 if __name__ == "__main__":

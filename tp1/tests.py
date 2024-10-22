@@ -1,40 +1,159 @@
-from juego_monedas import juego_monedas
-from jugador import Jugador
-from collections import deque
+
+from juego_monedas import main
 
 def pruebas():
-    test1()
-    test2_numeros_grandes()
+    test6()
+    test20()
+    test25()
+    test50()
+    test100()
+    test1000()
+    test10000()
+    test20000()
+    test_valores_grandes()
+    test_empate()
+    test_casi_empate()
 
-def test1():
-    "Arrange"
-    arr = deque([3,9,1,8,2,5])
-    sofia = Jugador("Sofia")
-    mateo = Jugador("Mateo")
-    turno = True
+def leer_resultados(archivo_resultados):
+    with open(archivo_resultados, 'r') as f:
+        lineas = f.readlines()
+        sophia_ganancia = int(lineas[0].split(': ')[1])
+        mateo_ganancia = int(lineas[1].split(': ')[1])
+    return sophia_ganancia, mateo_ganancia
+
+def test6():
+    path = 'archivos_prueba/6.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_6.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
     
-    "Act"
-    juego_monedas(arr, sofia, mateo)
+    assert sophia_ganancia > mateo_ganancia, f"Test 6 monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 22, f"Test 6 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    assert mateo_ganancia == 6, f"Test 6 monedas: No devuelve la correcta cantidad de monedas, Mateo tiene: {mateo_ganancia} pesos"
+    print("Test 6 monedas: pasó")
+
+def test20():
+    path = 'archivos_prueba/20.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_20.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
     
-    "Assert"
-    assert sofia.ganancia == 22, f"Test 1: No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.ganancia} pesos"
-    assert mateo.ganancia == 6, f"Test 1: No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.ganancia} pesos"
-    print("Test 1: pasó")
+    assert sophia_ganancia > mateo_ganancia, f"Test 20 monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 7165, f"Test 20 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    print("Test 20 monedas: pasó")
 
-def test2_numeros_grandes():
-    "Arrange"
-    arr = deque([413759, 698681, 730491, 596380, 3014, 416704, 874886, 35898, 686505, 491032])
-    sofia = Jugador("Sofia")
-    mateo = Jugador("Mateo")
-    turno = True
+def test25():
+    path = 'archivos_prueba/25.txt'
 
-    "Act"
-    juego_monedas(arr, sofia, mateo)
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_25.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
     
-    "Assert"
-    assert sofia.ganancia == 3391470, f"Test 2 - Números grandes: No devuelve la correcta cantidad de monedas, sofia tiene: {sofia.ganancia} pesos"
-    assert mateo.ganancia == 1555880, f"Test 2 - Números grandes: No devuelve la correcta cantidad de monedas, mateo tiene: {mateo.ganancia} pesos"
-    print("Test 2 - Números grandes: pasó")
+    assert sophia_ganancia > mateo_ganancia, f"Test 25 monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 9635, f"Test 25 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    print("Test 25 monedas: pasó")
 
+def test50():
+    path = 'archivos_prueba/50.txt'
 
-pruebas()
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_50.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    
+    assert sophia_ganancia > mateo_ganancia, f"Test 50 monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 17750, f"Test 50 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    print("Test 50 monedas: pasó")
+
+def test100():
+    path = 'archivos_prueba/100.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_100.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    
+    assert sophia_ganancia > mateo_ganancia, f"Test 100 monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 35009, f"Test 100 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    print("Test 100 monedas: pasó")
+
+def test1000():
+    path = 'archivos_prueba/1000.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_1000.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    
+    assert sophia_ganancia > mateo_ganancia, f"Test 1000 monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 357814, f"Test 1000 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    print("Test 1000 monedas: pasó")
+
+def test10000():
+    path = 'archivos_prueba/10000.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_10000.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    
+    assert sophia_ganancia > mateo_ganancia, f"Test 10000 monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 3550307, f"Test 10000 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    print("Test 10000 monedas: pasó")
+
+def test20000():
+    path = 'archivos_prueba/20000.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_20000.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    
+    assert sophia_ganancia > mateo_ganancia, f"Test 20000 monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 7139357, f"Test 20000 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    print("Test 20000 monedas: pasó")
+
+def test_valores_grandes():
+    path = 'archivos_prueba/valores_grandes.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_valores_grandes.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    
+    assert sophia_ganancia > mateo_ganancia, f"Test valores grandes monedas: Sophia no tiene mayor ganancia que Mateo"
+    assert sophia_ganancia == 339147000000, f"Test valores grandes monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    assert mateo_ganancia == 155588000000, f"Test valores grandes monedas: No devuelve la correcta cantidad de monedas, Mateo tiene: {mateo_ganancia} pesos"
+    print("Test valores grandes monedas: pasó")
+
+def test_empate():
+    path = 'archivos_prueba/empate.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_empate.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    
+    assert sophia_ganancia == mateo_ganancia, f"Test empate monedas: Mateo y Sophia no tienen la misma ganancia"
+    assert sophia_ganancia == 50, f"Test empate monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
+    assert mateo_ganancia == 50, f"Test empate monedas: No devuelve la correcta cantidad de monedas, Mateo tiene: {mateo_ganancia} pesos"
+    print("Test empate monedas: pasó")
+
+def test_casi_empate():
+    path = 'archivos_prueba/casi_empate.txt'
+
+    main(path)
+
+    resultados_path = f'archivos_resultados/resultados_casi_empate.txt'
+    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    
+    assert sophia_ganancia > mateo_ganancia, f"Test casi empate monedas: Sophia no tiene mayor ganancia que Mateo"
+    print("Test casi empate monedas: pasó")
+
+if __name__ == "__main__":
+    pruebas()
