@@ -31,16 +31,16 @@ def elecciones_sophia(monedas):
 
     return elecciones
 
-def juego_monedas(monedas, elecciones, jugador_n1, jugador_n2):
+def juego_monedas(monedas, elecciones, sophia, mateo):
     for eleccion in elecciones:
         if eleccion == ELECCION_PRIMERA_MONEDA + SOPHIA:
-            jugador_n1.ganancia += monedas.popleft()
+            sophia.ganancia += monedas.popleft()
         elif eleccion == ELECCION_ULTIMA_MONEDA + SOPHIA:
-            jugador_n1.ganancia += monedas.pop()
+            sophia.ganancia += monedas.pop()
         elif eleccion == ELECCION_PRIMERA_MONEDA + MATEO:
-            jugador_n2.ganancia += monedas.popleft()
+            mateo.ganancia += monedas.popleft()
         else:
-            jugador_n2.ganancia += monedas.pop()
+            mateo.ganancia += monedas.pop()
 
 def jugar(path):
     
@@ -49,9 +49,10 @@ def jugar(path):
     monedas = deque(lista_monedas)
     sophia = Jugador(SOPHIA)
     mateo = Jugador(MATEO)
-    juego_monedas(monedas, elecciones_sophia(deque(monedas)), sophia, mateo)
+    elecciones = elecciones_sophia(deque(monedas))
+    juego_monedas(monedas, elecciones, sophia, mateo)
 
-    dar_resultados_juego(path, sophia.ganancia, mateo.ganancia)
+    dar_resultados_juego(path, sophia.ganancia, mateo.ganancia, elecciones)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

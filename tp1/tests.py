@@ -13,11 +13,10 @@ def tests():
     test_empate()
     test_casi_empate()
 
-def leer_resultados(archivo_resultados):
+def leer_resultados_juego(archivo_resultados):
     with open(archivo_resultados, 'r') as f:
-        lineas = f.readlines()
-        sophia_ganancia = int(lineas[0].split(': ')[1])
-        mateo_ganancia = int(lineas[1].split(': ')[1])
+        sophia_ganancia = int(f.readline().split(': ')[1])
+        mateo_ganancia = int(f.readline().split(': ')[1])
     return sophia_ganancia, mateo_ganancia
 
 def test6():
@@ -26,7 +25,7 @@ def test6():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_6.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test 6 monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 22, f"Test 6 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -39,7 +38,7 @@ def test20():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_20.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test 20 monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 7165, f"Test 20 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -51,7 +50,7 @@ def test25():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_25.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test 25 monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 9635, f"Test 25 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -63,7 +62,7 @@ def test50():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_50.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test 50 monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 17750, f"Test 50 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -75,7 +74,7 @@ def test100():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_100.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test 100 monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 35009, f"Test 100 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -87,7 +86,7 @@ def test1000():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_1000.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test 1000 monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 357814, f"Test 1000 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -99,7 +98,7 @@ def test10000():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_10000.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test 10000 monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 3550307, f"Test 10000 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -111,7 +110,7 @@ def test20000():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_20000.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test 20000 monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 7139357, f"Test 20000 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -123,7 +122,7 @@ def test_valores_grandes():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_valores_grandes.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test valores grandes monedas: Sophia no tiene mayor ganancia que Mateo"
     assert sophia_ganancia == 339147000000, f"Test valores grandes monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -136,7 +135,7 @@ def test_empate():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_empate.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia == mateo_ganancia, f"Test empate monedas: Mateo y Sophia no tienen la misma ganancia"
     assert sophia_ganancia == 50, f"Test empate monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
@@ -149,7 +148,7 @@ def test_casi_empate():
     jugar(path)
 
     resultados_path = f'archivos_resultados/resultados_casi_empate.txt'
-    sophia_ganancia, mateo_ganancia = leer_resultados(resultados_path)
+    sophia_ganancia, mateo_ganancia = leer_resultados_juego(resultados_path)
     
     assert sophia_ganancia > mateo_ganancia, f"Test casi empate monedas: Sophia no tiene mayor ganancia que Mateo"
     print("Test casi empate monedas: pasó")

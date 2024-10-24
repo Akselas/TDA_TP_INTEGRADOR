@@ -19,9 +19,11 @@ def archivo_resultados_juego(path):
     nombre_archivo_resultados = f'resultados_{nombre_sin_extension}.txt'
     return nombre_archivo_resultados
 
-def dar_resultados_juego(path, ganancia_jugador_n1, ganancia_jugador_n2):
+def dar_resultados_juego(path, ganancia_sophia, ganancia_mateo, elecciones):
     nombre_carpeta_resultados = carpeta_resultados_juego()
     nombre_archivo_resultados = archivo_resultados_juego(path)
     with open(os.path.join(nombre_carpeta_resultados, nombre_archivo_resultados), 'w') as archivo_resultados:
-        archivo_resultados.write(f"Ganancia de Sophia: {ganancia_jugador_n1}\n")
-        archivo_resultados.write(f"Ganancia de Mateo: {ganancia_jugador_n2}\n")
+        archivo_resultados.write(f"Ganancia de Sophia: {ganancia_sophia}\n")
+        archivo_resultados.write(f"Ganancia de Mateo: {ganancia_mateo}\n")
+        archivo_resultados.write("\n")
+        archivo_resultados.write(f"Elecciones: {'; '.join(elecciones)}")
