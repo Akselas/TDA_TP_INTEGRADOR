@@ -1,4 +1,5 @@
 import sys
+sys.path.append("../") 
 from manejo_archivos import obtener_lista_monedas, dar_resultados_juego
 from jugador import Jugador
 from collections import deque

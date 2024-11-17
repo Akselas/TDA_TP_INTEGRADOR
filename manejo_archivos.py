@@ -9,7 +9,8 @@ def obtener_lista_monedas(path):
         return list(map(int, linea_valores_monedas.split(';')))
     
 def carpeta_resultados_juego():
-    carpeta_resultados = CARPETA_RESULTADOS
+    path = os.getcwd()
+    carpeta_resultados = os.path.join(path, 'archivos_resultados')
     os.makedirs(carpeta_resultados, exist_ok=True)
     return carpeta_resultados
 
