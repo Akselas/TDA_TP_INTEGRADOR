@@ -2,6 +2,7 @@ import sys
 sys.path.append("../") 
 from manejo_archivos import obtener_lista_monedas, dar_resultados_juego
 from jugador import Jugador
+from collections import deque
 
 SOPHIA = 'Sophia' 
 MATEO = 'Mateo'
@@ -48,20 +49,20 @@ def max_acumulados_sophia(monedas):
     else:
         return max_acumulados_sophia_n_impar(monedas, n, max_acumulados)
     
-def elegir_moneda(elecciones, monedas, i, j, primera, nombre_hermano):
+def elegir_moneda(elecciones, i, j, primera, nombre_hermano):
     if primera:
-        elecciones.append(nombre_hermano + ELECCION_PRIMERA_MONEDA + " (" + str(monedas[i]) + ")")
+        elecciones.append(nombre_hermano + ELECCION_PRIMERA_MONEDA)
         i += 1
     else: 
-        elecciones.append(nombre_hermano + ELECCION_ULTIMA_MONEDA + " (" + str(monedas[j]) + ")")
+        elecciones.append(nombre_hermano + ELECCION_ULTIMA_MONEDA)
         j -= 1
     return i, j
 
 def elegir_mejor_moneda(elecciones, monedas, i, j, nombre_hermano):
     if monedas[i] >= monedas[j]:
-        return elegir_moneda(elecciones, monedas, i, j, True, nombre_hermano)
+        return elegir_moneda(elecciones, i, j, True, nombre_hermano)
     else:
-        return elegir_moneda(elecciones, monedas, i, j, False, nombre_hermano)
+        return elegir_moneda(elecciones,i, j, False, nombre_hermano)
     
 def recuperar_elecciones(monedas, max_ganancias_sophia):
     elecciones = []
@@ -75,9 +76,9 @@ def recuperar_elecciones(monedas, max_ganancias_sophia):
             if tam == 0:
                 i, j = elegir_mejor_moneda(elecciones, monedas, i, j, SOPHIA)
             elif monedas[i] + max_ganancias_sophia[tam-1][primera_moneda_tras_eleccion_mateo(monedas, i+1, j)] == max_ganancias_sophia[tam][i]:
-                i, j = elegir_moneda(elecciones, monedas, i, j, True, SOPHIA)
+                i, j = elegir_moneda(elecciones, i, j, True, SOPHIA)
             else:
-                i, j = elegir_moneda(elecciones, monedas, i, j, False, SOPHIA)
+                i, j = elegir_moneda(elecciones, i, j, False, SOPHIA)
             tam -= 1
         else:
             i, j = elegir_mejor_moneda(elecciones, monedas, i, j, MATEO)
@@ -85,7 +86,16 @@ def recuperar_elecciones(monedas, max_ganancias_sophia):
 
     return elecciones
 
-#def juego_monedas(monedas, elecciones, sophia, mateo):
+def juego_monedas(monedas, elecciones, sophia, mateo):
+    for eleccion in elecciones:
+        if eleccion == SOPHIA + ELECCION_PRIMERA_MONEDA:
+            sophia.ganancia += monedas.popleft()
+        elif eleccion == SOPHIA + ELECCION_ULTIMA_MONEDA:
+            sophia.ganancia += monedas.pop()
+        elif eleccion == MATEO + ELECCION_PRIMERA_MONEDA:
+            mateo.ganancia += monedas.popleft()
+        else:
+            mateo.ganancia += monedas.pop()
 
 def jugar(path):
     
@@ -94,8 +104,7 @@ def jugar(path):
     mateo = Jugador(MATEO)
     max_ganancias_sophia = max_acumulados_sophia(monedas)
     elecciones = recuperar_elecciones(monedas, max_ganancias_sophia)
-    juego_monedas(monedas, elecciones, sophia, mateo)
-
+    juego_monedas(deque(monedas), elecciones, sophia, mateo)
     dar_resultados_juego(path, sophia.ganancia, mateo.ganancia, elecciones)
 
 if __name__ == "__main__":
@@ -104,11 +113,4 @@ if __name__ == "__main__":
         sys.exit(1)
 
     path = sys.argv[1]
-    monedas = obtener_lista_monedas(path)
-    
-    max_ganancias_sophia = max_acumulados_sophia(monedas)
-    elecciones = recuperar_elecciones(monedas, max_ganancias_sophia)
-    for i in max_ganancias_sophia:
-        print(i)
-    print(max_ganancias_sophia[-1][0])
-    print(elecciones)
+    jugar(path)
