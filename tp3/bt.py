@@ -113,6 +113,20 @@ def menor_demanda_incumplida_posible(barcos, barco_actual, demanda_incumplida_ac
 
     return demanda_incumplida_posible
 
+
+def barco_entra_por_demandas(dem_fil, dem_col, barcos, barco):
+    tamaño_barco = barcos[barco]
+
+    for demanda in dem_fil:
+        if demanda >= tamaño_barco:
+            return True
+
+    for demanda in dem_col:
+        if demanda >= tamaño_barco:
+            return True
+
+    return False
+
 def batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual, tablero, pos_actual, solucion_parcial, mejor_solucion, menor_demanda_incumplida):
     
     if barco_actual == k:
@@ -138,9 +152,14 @@ def batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual, tablero, p
     if menor_demanda_incumplida[0] <= menor_demanda_incumplida_posible(barcos, barco_actual, sum(dem_fil) + sum(dem_col)):
         return mejor_solucion, menor_demanda_incumplida 
 
+    if not barco_entra_por_demandas(dem_fil, dem_col, barcos, barco_actual):
+        return batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual+1, tablero, pos_actual, solucion_parcial, mejor_solucion, menor_demanda_incumplida)
+   
+    if barco_actual != 0 and barcos[barco_actual-1] == barcos[barco_actual] and solucion_parcial[barco_actual-1] is None:
+        return batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual+1, tablero, pos_actual, solucion_parcial, mejor_solucion, menor_demanda_incumplida) 
+
     sol_horizontal = None 
     sol_vertical = None
-   
     if ubicar_barco_horizontal(dem_fil, n, dem_col, m, barco_actual, barcos[barco_actual], tablero, pos_actual, solucion_parcial):
         prox_pos = proxima_posicion_libre_desde((0,0), tablero, dem_fil, n, dem_col, m)
         sol_horizontal = batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual+1, tablero, prox_pos, solucion_parcial, mejor_solucion, menor_demanda_incumplida)
@@ -188,16 +207,49 @@ def batalla_naval(dem_fil, dem_col, barcos):
 #demandas_columnas = [1,4,3]
 #barcos = [3,3,4]
 
-10,10,10
-demandas_filas = [3,2,2,4,2,1,1,2,3,0]
-demandas_columnas = [1,2,1,3,2,2,3,1,5,0]
-barcos = [4,3,3,2,2,2,1,1,1,1]
+#10,10,10
+#demandas_filas = [3,2,2,4,2,1,1,2,3,0]
+#demandas_columnas = [1,2,1,3,2,2,3,1,5,0]
+#barcos = [4,3,3,2,2,2,1,1,1,1]
 
 #12,12,21 ---------------------------------
-#demandas_filas = [3,6,1,2,3,6,5,2,0,3,0,3]
-#demandas_columnas = [3,0,1,1,3,1,0,3,3,4,1,4]
-#barcos = [4,3,7,4,3,2,2,5,5,5,4,4,5,5,7,6,4,1,7,4,4]
+demandas_filas = [3,6,1,2,3,6,5,2,0,3,0,3]
+demandas_columnas = [3,0,1,1,3,1,0,3,3,4,1,4]
+barcos = [4,3,7,4,3,2,2,5,5,5,4,4,5,5,7,6,4,1,7,4,4]
+
+#15-10-15
+#demandas_filas = [0,3,4,1,1,4,5,0,4,5,4,2,4,3,2]
+#demandas_columnas = [0,0,3,4,1,4,6,5,2,0]
+#barcos = [6,2,1,8,7,2,7,2,5,8,1,8,8,1,6]
+
+#20-20-20
+#demandas_filas = [5,0,0,6,2,1,6,3,3,1,2,4,5,5,2,5,4,0,4,5]
+#demandas_columnas = [0,5,5,0,6,2,2,6,2,1,3,1,2,3,1,4,5,2,1,6]
+#barcos = [5,5,6,5,1,3,1,5,1,1,1,1,2,3,1,1,6,7,7,4]
+
+#20-25-30 ---------------------------------
+#demandas_filas = [1,2,5,10,11,0,11,11,3,9,9,3,9,6,1,8,3,11,6,7]
+#demandas_columnas = [5,4,5,2,10,1,0,8,7,6,0,5,4,8,4,7,4,0,8,5,6,2,4,9,7]
+#barcos = [9,4,11,12,12,5,5,6,9,5,12,3,3,9,1,1,6,13,7,2,4,5,4,12,4,3,10,13,13,8]
+
+#30-25-25 ---------------------------------
+#demandas_filas = [3,11,11,1,2,5,4,10,5,2,12,6,12,7,0,2,0,8,10,11,6,10,0,11,5,8,6,9,8,0]
+#demandas_columnas = [3,12,1,5,14,15,6,11,2,10,12,10,6,2,7,1,5,11,5,10,7,11,4,0,5]
+#barcos = [10,6,6,11,14,15,8,10,1,14,7,6,16,13,16,12,1,12,5,10,4,14,13,12,4]
+
+import time
+
+# Inicio del temporizador
+start_time = time.time()
 
 res = batalla_naval(demandas_filas, demandas_columnas, barcos)
 # solucion de la forma [(pos_i_barco1, pos_f_barco1), (pos_i_barco2, pos_f_barco2), ... , (pos_i_barcok, pos_f_barcok)]
 print(res)
+
+# Fin del temporizador
+end_time = time.time()
+
+# Tiempo transcurrido
+elapsed_time = end_time - start_time
+print(f"Tiempo de ejecución: {elapsed_time:.4f} segundos")
+

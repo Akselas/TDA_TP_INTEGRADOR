@@ -114,19 +114,21 @@ def menor_demanda_incumplida_posible(barcos, barco_actual, demanda_incumplida_ac
     print(demanda_incumplida_posible)
     return demanda_incumplida_posible
 
+
 def barco_entra_por_demandas(dem_fil, dem_col, barcos, barco):
-    print("\n barco " + str(barco) + "de tamaño " + str(barcos[barco]))
-    print(dem_fil)
-    print(dem_col)
-    
-    if barcos[barco] < max(dem_fil):
-        print("barco entra en alguna fila")
-        return True
-    if barcos[barco] < max(dem_col):
-        print("barco entra en alguna columna")
-        return True
+    tamaño_barco = barcos[barco]
+
+    for demanda in dem_fil:
+        if demanda >= tamaño_barco:
+            print("barco entra en alguna fila")
+            return True
+
+    for demanda in dem_col:
+        if demanda >= tamaño_barco:
+            print("barco entra en alguna columna")
+            return True
+
     return False
-    #return tamaño_barco < max(dem_fil) or tamaño_barco < max(dem_col)
 
 
 def batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual, tablero, pos_actual, solucion_parcial, mejor_solucion, menor_demanda_incumplida):
@@ -165,6 +167,9 @@ def batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual, tablero, p
     
     if not barco_entra_por_demandas(dem_fil, dem_col, barcos, barco_actual):
         return batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual+1, tablero, pos_actual, solucion_parcial, mejor_solucion, menor_demanda_incumplida)
+
+    if barco_actual != 0 and barcos[barco_actual-1] == barcos[barco_actual] and solucion_parcial[barco_actual-1] is None:
+        return batalla_naval_bt(dem_fil, n, dem_col, m, barcos, k, barco_actual+1, tablero, pos_actual, solucion_parcial, mejor_solucion, menor_demanda_incumplida) 
 
     sol_horizontal = None 
     sol_vertical = None
@@ -226,14 +231,14 @@ def batalla_naval(dem_fil, dem_col, barcos):
 #barcos = [3,3,4]
 
 #10,10,10
-demandas_filas = [3,2,2,4,2,1,1,2,3,0]
-demandas_columnas = [1,2,1,3,2,2,3,1,5,0]
-barcos = [4,3,3,2,2,2,1,1,1,1]
+#demandas_filas = [3,2,2,4,2,1,1,2,3,0]
+#demandas_columnas = [1,2,1,3,2,2,3,1,5,0]
+#barcos = [4,3,3,2,2,2,1,1,1,1]
 
 #12,12,21 ---------------------------------
-#demandas_filas = [3,6,1,2,3,6,5,2,0,3,0,3]
-#demandas_columnas = [3,0,1,1,3,1,0,3,3,4,1,4]
-#barcos = [4,3,7,4,3,2,2,5,5,5,4,4,5,5,7,6,4,1,7,4,4]
+demandas_filas = [3,6,1,2,3,6,5,2,0,3,0,3]
+demandas_columnas = [3,0,1,1,3,1,0,3,3,4,1,4]
+barcos = [4,3,7,4,3,2,2,5,5,5,4,4,5,5,7,6,4,1,7,4,4]
 
 res = batalla_naval(demandas_filas, demandas_columnas, barcos)
 # solucion de la forma [(pos_i_barco1, pos_f_barco1), (pos_i_barco2, pos_f_barco2), ... , (pos_i_barcok, pos_f_barcok)]
