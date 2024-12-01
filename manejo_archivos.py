@@ -28,3 +28,18 @@ def dar_resultados_juego(path, ganancia_sophia, ganancia_mateo, elecciones):
         archivo_resultados.write(f"Ganancia de Mateo: {ganancia_mateo}\n")
         archivo_resultados.write("\n")
         archivo_resultados.write(f"Elecciones: {'; '.join(elecciones)}")
+
+def obtener_barcos_y_demandas(path):
+    with open(path, 'r') as archivo_barcos:
+        archivo_barcos.readline() #ignorar comentario
+        linea_valores_barcos = archivo_barcos.readline().strip()
+        return list(map(int, linea_valores_barcos.split(';')))
+
+
+def dar_resultados_juego_tp3(path, posiciones_barcos, demanda_incumplida):
+    nombre_carpeta_resultados = carpeta_resultados_juego()
+    nombre_archivo_resultados = archivo_resultados_juego(path)
+    with open(os.path.join(nombre_carpeta_resultados, nombre_archivo_resultados), 'w') as archivo_resultados:
+        archivo_resultados.write(f"Ubicacion de Los barcos: {posiciones_barcos}\n")
+        archivo_resultados.write(f"Demanda Incumplida: {demanda_incumplida}\n")
+        archivo_resultados.write("\n")

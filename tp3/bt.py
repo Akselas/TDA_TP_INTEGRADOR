@@ -234,9 +234,9 @@ def batalla_naval(dem_fil, dem_col, barcos):
     return batalla_naval_bt(tablero, dem_fil, n, dem_col, m, barcos, k, barco_inicial, pos_inicial, orientacion_inicial, solucion_parcial, [], [sum(dem_fil) + sum(dem_col)])
 
 #3,3,2 --> 7 OK
-#demandas_filas = [3,1,2]
-#demandas_columnas = [3,2,0]
-#barcos = [1,1]
+demandas_filas = [3,1,2]
+demandas_columnas = [3,2,0]
+barcos = [1,1]
 
 #5,5,6 --> 6 OK
 #demandas_filas = [3,3,0,1,1]
