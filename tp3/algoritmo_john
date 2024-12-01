@@ -1,0 +1,122 @@
+
+
+def aproximacion_john_jellicoe(n, m, barcos, demandas_filas, demandas_columnas):
+    """
+    Implementa el algoritmo de aproximación de John Jellicoe para el problema de la Batalla Naval.
+
+    :param n: Número de filas del tablero.
+    :param m: Número de columnas del tablero.
+    :param barcos: Lista de longitudes de los barcos disponibles.
+    :param demandas_filas: Lista de demandas de las filas.
+    :param demandas_columnas: Lista de demandas de las columnas.
+    :return: Lista de posiciones de los barcos y la demanda incumplida total.
+    """
+    # Tablero vacío
+    tablero = [[0 for _ in range(m)] for _ in range(n)]
+    demandas = {"filas": demandas_filas[:], "columnas": demandas_columnas[:]}  # Copia de las demandas
+    barcos = sorted(barcos, reverse=True)  # Ordenar los barcos por longitud descendente
+    posiciones_barcos = []
+
+    # Calcula la demanda total al inicio
+    demanda_total = sum(demandas_filas) + sum(demandas_columnas)
+    demanda_cumplida = 0
+
+    def puede_colocar_barco(fila, columna, longitud, horizontal):
+        """Verifica si es posible colocar un barco en la posición dada."""
+        if horizontal:
+            if columna + longitud > m or any(tablero[fila][c] for c in range(columna, columna + longitud)):
+                return False
+            # Verificar restricciones de adyacencia
+            for f in range(max(0, fila - 1), min(n, fila + 2)):
+                for c in range(max(0, columna - 1), min(m, columna + longitud + 1)):
+                    if tablero[f][c]:
+                        return False
+        else:
+            if fila + longitud > n or any(tablero[f][columna] for f in range(fila, fila + longitud)):
+                return False
+            # Verificar restricciones de adyacencia
+            for f in range(max(0, fila - 1), min(n, fila + longitud + 1)):
+                for c in range(max(0, columna - 1), min(m, columna + 2)):
+                    if tablero[f][c]:
+                        return False
+        return True
+
+    def colocar_barco(fila, columna, longitud, horizontal):
+        """Coloca un barco en el tablero y actualiza las demandas."""
+        
+        nonlocal demanda_cumplida
+
+        if horizontal:
+            for c in range(columna, columna + longitud):
+                tablero[fila][c] = 1
+                demanda_cumplida += longitud
+                demandas["filas"][fila] -= 1
+                demandas["columnas"][c] -= 1
+            posiciones_barcos.append((fila, columna))
+        else:
+            for f in range(fila, fila + longitud):
+                tablero[f][columna] = 1
+                demanda_cumplida += longitud
+                demandas["filas"][f] -= 1
+                demandas["columnas"][columna] -= 1
+            posiciones_barcos.append((fila, columna))
+
+    # Mientras haya barcos y demandas pendientes
+    while barcos:
+        barco = barcos.pop(0)  # Tomar el barco más largo
+        colocado = False
+
+        # Buscar fila/columna con mayor demanda restante
+        max_demanda_fila = max(demandas["filas"])
+        max_demanda_columna = max(demandas["columnas"])
+
+        if max_demanda_fila >= max_demanda_columna:  # Priorizar filas si tienen mayor o igual demanda
+            fila = demandas["filas"].index(max_demanda_fila)
+            for columna in range(m):
+                if puede_colocar_barco(fila, columna, barco, horizontal=True):
+                    colocar_barco(fila, columna, barco, horizontal=True)
+                    colocado = True
+                    break
+        else:  # Priorizar columnas si tienen mayor demanda
+            columna = demandas["columnas"].index(max_demanda_columna)
+            for fila in range(n):
+                if puede_colocar_barco(fila, columna, barco, horizontal=False):
+                    colocar_barco(fila, columna, barco, horizontal=False)
+                    colocado = True
+                    break
+
+        # Si no se pudo colocar el barco, se descarta
+        if not colocado:
+            continue
+    print(demanda_total)
+    print(demanda_cumplida)
+    demanda_incumplida = demanda_total - demanda_cumplida
+
+    return posiciones_barcos, demanda_incumplida
+
+def batalla_naval(dem_fil, dem_col, barcos):
+    
+    n = len(dem_fil)
+    m = len(dem_col)
+    barcos.sort(reverse=True)
+    solucion = aproximacion_john_jellicoe(n, m, barcos, dem_fil, dem_col)
+    return solucion
+
+#3,3,2 --> 7 OK
+demandas_filas = [3,1,2]
+demandas_columnas = [3,2,0]
+barcos = [1,1]
+
+#5,5,6 --> 6 OK
+#demandas_filas = [3,3,0,1,1]
+#demandas_columnas = [3,1,0,3,3]
+#barcos = [1,2,2,2,2,1]
+
+# 8,7,10 --> 27 OK
+#demandas_filas = [1,4,4,4,3,3,4,4]
+#demandas_columnas = [6,5,3,0,6,3,3]
+#barcos = [2,1,2,2,1,3,2,7,7,7]
+
+
+posiciones_barcos, demanda_incumplida = batalla_naval(demandas_filas, demandas_columnas, barcos)
+print(posiciones_barcos, demanda_incumplida)
