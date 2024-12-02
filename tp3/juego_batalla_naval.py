@@ -1,16 +1,16 @@
 import sys
 sys.path.append("../") 
 from bt import batalla_naval
+from algoritmo_john import batalla_naval_aprox
 from manejo_archivos import obtener_barcos_y_demandas, dar_resultados_juego_tp3
 
 def jugar(path):
 
     barcos, demandas_filas, demandas_columnas = obtener_barcos_y_demandas(path)
-    res = batalla_naval(demandas_filas, demandas_columnas, barcos)
-    print(res)
-    ubicaciones_barcos_solucion = res[0]
     demanda_a_cumplir = sum(demandas_filas) + sum(demandas_columnas)
-    demanda_incumplida_solucion = res[1][0]
+    ubicaciones_barcos_solucion, demanda_incumplida_solucion = batalla_naval(demandas_filas, demandas_columnas, barcos)
+    
+    #ubicaciones_barcos_solucion, demanda_incumplida_solucion = batalla_naval_aprox(demandas_filas, demandas_columnas, barcos)
     demanda_cumplida =  demanda_a_cumplir - demanda_incumplida_solucion
     dar_resultados_juego_tp3(path, ubicaciones_barcos_solucion, demanda_a_cumplir, demanda_cumplida)
 
