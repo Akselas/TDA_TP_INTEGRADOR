@@ -1,26 +1,22 @@
 import sys
 sys.path.append("../") 
-from bt import res
+from bt import batalla_naval
 from manejo_archivos import obtener_barcos_y_demandas, dar_resultados_juego_tp3
-from jugador import Jugador
-from collections import deque
-
-
-def juego_barcos(barcos, demandas_filas, demandas_columnas):
-    pass
 
 def jugar(path):
 
-    barcos = obtener_barcos_y_demandas[0]
-    demandas_filas= obtener_barcos_y_demandas[1]
-    demandas_columnas= obtener_barcos_y_demandas[2]
-    demanda_incumplida = res[1]
-    juego_barcos(barcos, demandas_filas, demandas_columnas)
-    dar_resultados_juego_tp3(path, barcos, demanda_incumplida)
+    barcos, demandas_filas, demandas_columnas = obtener_barcos_y_demandas(path)
+    res = batalla_naval(demandas_filas, demandas_columnas, barcos)
+    print(res)
+    ubicaciones_barcos_solucion = res[0]
+    demanda_a_cumplir = sum(demandas_filas) + sum(demandas_columnas)
+    demanda_incumplida_solucion = res[1][0]
+    demanda_cumplida =  demanda_a_cumplir - demanda_incumplida_solucion
+    dar_resultados_juego_tp3(path, ubicaciones_barcos_solucion, demanda_a_cumplir, demanda_cumplida)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Uso: python juego_monedas.py <path_al_archivo_de_x_y_z.txt>")
+        print("Uso: python juego_batalla_naval.py <path_al_archivo_de_x_y_z.txt>")
         sys.exit(1)
 
     path = sys.argv[1]

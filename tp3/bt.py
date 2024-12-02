@@ -234,9 +234,9 @@ def batalla_naval(dem_fil, dem_col, barcos):
     return batalla_naval_bt(tablero, dem_fil, n, dem_col, m, barcos, k, barco_inicial, pos_inicial, orientacion_inicial, solucion_parcial, [], [sum(dem_fil) + sum(dem_col)])
 
 #3,3,2 --> 7 OK
-demandas_filas = [3,1,2]
-demandas_columnas = [3,2,0]
-barcos = [1,1]
+#demandas_filas = [3,1,2]
+#demandas_columnas = [3,2,0]
+#barcos = [1,1]
 
 #5,5,6 --> 6 OK
 #demandas_filas = [3,3,0,1,1]
@@ -283,6 +283,7 @@ barcos = [1,1]
 #demandas_columnas = [3,12,1,5,14,15,6,11,2,10,12,10,6,2,7,1,5,11,5,10,7,11,4,0,5]
 #barcos = [10,6,6,11,14,15,8,10,1,14,7,6,16,13,16,12,1,12,5,10,4,14,13,12,4]
 
+'''
 import time
 
 # Inicio del temporizador
@@ -300,3 +301,4 @@ elapsed_time = end_time - start_time
 
 
 print(f"Tiempo de ejecución: {elapsed_time:.4f} segundos")
+'''
