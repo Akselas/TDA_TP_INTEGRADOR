@@ -29,6 +29,12 @@ def dar_resultados_juego(path, ganancia_sophia, ganancia_mateo, elecciones):
         archivo_resultados.write("\n")
         archivo_resultados.write(f"Elecciones: {'; '.join(elecciones)}")
 
+def leer_resultados_juego(archivo_resultados):
+    with open(archivo_resultados, 'r') as f:
+        sophia_ganancia = int(f.readline().split(': ')[1])
+        mateo_ganancia = int(f.readline().split(': ')[1])
+    return sophia_ganancia, mateo_ganancia
+
 def obtener_barcos_y_demandas(path):
     with open(path, 'r') as archivo_barcos:
         archivo_barcos.readline() #ignorar comentario

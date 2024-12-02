@@ -1,4 +1,6 @@
 from juego_monedas import jugar
+from manejo_archivos import leer_resultados_juego
+
 
 def tests():
     test6()
@@ -12,12 +14,6 @@ def tests():
     test_valores_grandes()
     test_empate()
     test_casi_empate()
-
-def leer_resultados_juego(archivo_resultados):
-    with open(archivo_resultados, 'r') as f:
-        sophia_ganancia = int(f.readline().split(': ')[1])
-        mateo_ganancia = int(f.readline().split(': ')[1])
-    return sophia_ganancia, mateo_ganancia
 
 def test6():
     path = 'archivos_prueba/6.txt'

@@ -18,9 +18,9 @@ def max_acumulados_sophia_desde(monedas, n, max_acumulados, k_inicial):
             j = i + k_actual - 1
 
             sig_i_eligiendo_i = primera_moneda_tras_eleccion_mateo(monedas, i+1, j)
-            max_acumulado_eligiendo_i = monedas[i] + max_acumulados[len(max_acumulados) - 1][sig_i_eligiendo_i]
+            max_acumulado_eligiendo_i = monedas[i] + max_acumulados[-1][sig_i_eligiendo_i]
             sig_i_eligiendo_j = primera_moneda_tras_eleccion_mateo(monedas, i, j-1)
-            max_acumulado_eligiendo_j = monedas[j] + max_acumulados[len(max_acumulados) - 1][sig_i_eligiendo_j]
+            max_acumulado_eligiendo_j = monedas[j] + max_acumulados[-1][sig_i_eligiendo_j]
 
             max_acumulados_k_actual.append(max(max_acumulado_eligiendo_i, max_acumulado_eligiendo_j))
         max_acumulados.append(max_acumulados_k_actual)

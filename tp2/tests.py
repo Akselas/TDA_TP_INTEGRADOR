@@ -1,4 +1,5 @@
 from juego_monedas import jugar
+from manejo_archivos import leer_resultados_juego
 
 def tests():
     test5()
@@ -11,12 +12,6 @@ def tests():
     test2000()
     test5000()
     test10000()
-
-def leer_resultados_juego(archivo_resultados):
-    with open(archivo_resultados, 'r') as f:
-        sophia_ganancia = int(f.readline().split(': ')[1])
-        mateo_ganancia = int(f.readline().split(': ')[1])
-    return sophia_ganancia, mateo_ganancia
 
 def test5():
     path = 'archivos_prueba/5.txt'
@@ -147,3 +142,6 @@ def test10000():
     assert sophia_ganancia == 34107537, f"Test 10000 monedas: No devuelve la correcta cantidad de monedas, Sophia tiene: {sophia_ganancia} pesos"
     assert mateo_ganancia == 25730392, f"Test 10000 monedas: No devuelve la correcta cantidad de monedas, Mateo tiene: {mateo_ganancia} pesos"
     print("Test 10000 monedas: pasó")
+
+if __name__ == "__main__":
+    tests()
