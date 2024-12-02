@@ -71,7 +71,6 @@ def aproximacion_john_jellicoe(n, m, barcos, demandas_filas, demandas_columnas, 
     
     numero_barco = 0
     solucion = [None]*len(barcos)
-    demanda_total = sum(demandas_filas) + sum(demandas_columnas)
 
     def puede_colocar_barco(fila, columna, longitud, horizontal):
         if horizontal:
@@ -85,8 +84,8 @@ def aproximacion_john_jellicoe(n, m, barcos, demandas_filas, demandas_columnas, 
         else:
             ubicar_barco_vertical(tablero, demandas_filas, demandas_columnas, barco, longitud, posicion, solucion)
 
-    while barcos:
-        long_barco = barcos.pop(0)
+    while numero_barco < len(barcos):
+        long_barco = barcos[numero_barco]
 
         max_demanda_fila = max(demandas_filas)
         filas_con_max_demanda = [i for i, d in enumerate(demandas_filas) if d == max_demanda_fila]

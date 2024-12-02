@@ -34,20 +34,3 @@ def time_algorithm(algorithm, sizes, get_args):
             total_times[i] += result
 
     return {s: t / RUNS_PER_SIZE for s, t in total_times.items()}
-
-def time_algorithmm(algorithm, sizes, get_args):
-    futures = {}
-    total_times = {i: 0 for i in sizes}
-
-    # Usa un ProcessPoolExecutor para ejecutar las mediciones en paralelo
-    # (el ThreadPoolExecutor no sirve por el GIL de Python)
-    with ProcessPoolExecutor(MAX_WORKERS) as p:
-        for i in sizes:
-            for _ in range(RUNS_PER_SIZE):
-                futures[p.submit(_time_run, algorithm, *get_args(*i))] = i
-        for f in as_completed(futures):
-            result = f.result()
-            i = futures[f]
-            total_times[i] += result
-
-    return {s: t / RUNS_PER_SIZE for s, t in total_times.items()}
